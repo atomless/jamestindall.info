@@ -1,0 +1,381 @@
+/* Grid system and page structure */
+
+body, html {
+  min-width:360px;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden !important;
+}
+body {
+  //@include baseline-grid;
+  background-color: $background-color;
+}
+
+.hidden {
+  display: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 0 !important;
+}
+
+.loading {
+  position: relative;
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: transparent url("/images/spin.svg") no-repeat 50% 40% !important;
+    z-index: 3;
+  }
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+ }
+
+/* minimal clearfix */
+.cf {
+  &::after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+/* ================ */
+
+#site-name {
+  position: relative;
+  top: -.25rem;
+}
+
+.centred-h {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  max-width: 1035px;
+  padding: 0 $grid-unit;
+}
+
+.xlarge-margin-bottom {
+  margin-bottom: $grid-unitx6;
+}
+
+.large-margin-bottom {
+  margin-bottom: $grid-unitx4;
+}
+
+.medium-margin-bottom {
+  margin-bottom: $grid-unitx2;
+}
+
+.small-margin-bottom {
+  margin-bottom: $grid-unit;
+}
+
+figure {
+  position: relative;
+  img {
+    @extend .centred-h;
+  }
+}
+
+.header-image {
+  @extend .centred-h;
+}
+
+img[src*="animated-portrait.gif"] {
+  padding: $grid-unitx2 0 $grid-unit 0;
+}
+
+nav {
+  background: $body-copy-color;
+  display: block;
+  border-bottom: $grid-unit solid $gray-lighter;
+  overflow: hidden;
+  &.collapsed {
+    @extend .hidden;
+  }
+  .title {
+    padding-top: .825rem;
+    display: block;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    padding-bottom: $grid-unit;
+  }
+}
+
+header {
+  padding: $grid-unit 0;
+  text-align:center;
+  background: $gray-lighter;
+  #nav-toggle {
+    position: absolute;
+    top: $grid-unit;
+    left: 0px;
+    border: 0;
+    outline: none;
+    padding: .35rem;
+    margin: 0 0 0 1.3rem;
+    span {
+      background: $gray;
+      display: block;
+      width: .9rem;
+      height: 2px;
+      margin-bottom: .15rem;
+    }
+    span:last-child {
+      margin-bottom: 0;
+    }
+    &:hover {
+      span {
+        background: $link-color;
+      }
+    }
+  }
+
+  ul.small-menu {
+    @include small-menu();
+    margin-top: -.5rem;
+  }
+}
+
+main {
+  section {
+    @include border-top();
+    position: relative;
+  }
+  article {
+    @extend .large-margin-bottom;
+  }
+  section.interlude {
+    background: #fff;
+    overflow: hidden;
+  }
+  section.portrait + section {
+    @include add-bubble-arrow;
+  }
+  .contact-details {
+    @extend .medium-margin-bottom;
+  }
+}
+
+.section-title {
+  padding-left: $grid-unit;
+  @extend .medium-margin-bottom;
+  display: block;
+}
+
+.tldr,
+.bio-leader {
+  @extend .medium-margin-bottom;
+}
+
+.bio {
+  @extend .centred-h;
+}
+
+.bio-body {
+  @include column-count(2);
+  p {
+
+  }
+}
+
+#cv-section article {
+  @extend .centred-h;
+}
+.cv {
+  ul {
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+  }
+  li {
+    text-align: right;
+    display: block;
+    padding: 0 0 $grid-unitx4 0;
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+    &::before {
+      content: '_';
+      position: absolute;
+      bottom: $grid-unitx4;
+      margin-bottom: -9px;
+      display: block;
+      text-align: center;
+      width: 100%;
+    }
+    &::after {
+      content: ' ';
+      display: block;
+      border-right: 1px dashed $gray-lighter;
+      width: 1px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      z-index: -1;
+    }
+    figure {
+      @extend .xlarge-margin-bottom;
+      position: relative;
+      &::after {
+        content: '●';
+        font-size: 3rem;
+        text-align: center;
+        display: block;
+        position: absolute;
+        width: 100%;
+        z-index: -2;
+        bottom: -$grid-unitx4;
+      }
+    }
+    dl {
+      @extend .cf;
+      position: relative;
+    }
+    dl.date,
+    dl.job,
+    dl.company {
+      //padding: 0 1.65rem;
+      max-width: 38rem;
+      margin: 0 auto;
+      dt,
+      dd {
+        width: 50%;
+        float: left;
+        display: block;
+        //border-bottom: 1px solid $gray-lighter;
+        //padding-top: .15rem;
+      }
+      dt {
+        text-align: right;
+        &::after{
+          font-style: normal;
+          padding-left: .1rem;
+          padding-right: .5rem;
+          margin-right: -3px;
+          z-index: 1;
+        }
+      }
+      dd {
+        text-align: left;
+        padding-left: .5rem;
+      }
+      dd[itemprop="jobTitle"] {
+        //margin-top: -.15rem !important;
+        //padding-bottom: .35rem;
+      }
+    }
+    dl.company {
+      padding-bottom: $grid-unit;
+    }
+    dl.role {
+      z-index: 2;
+      padding: $grid-unit $grid-unit $grid-unitx2;
+      max-width: 38rem;
+      margin: 0 auto;
+      background-color: $background-color;
+      dt {
+        display: none;
+        //line-height: $line-height !important;
+        margin:.45rem 50% $grid-unit 0;
+        padding-right: $grid-unit;
+      }
+      p:last-of-type {
+        margin-bottom:0;
+      }
+    }
+  }
+}
+
+.contact-details {
+  @extend .centred-h;
+  text-align: center;
+  ul {
+    @include column-count(4);
+    @include column-gap(0px);
+    list-style: none;
+    margin: 0 auto;
+    padding-left: 7%;
+  }
+  li {
+    white-space: nowrap;
+    margin-left: 0;
+    padding-left: 0;
+    width: 90%;
+    a {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      padding: 0 0 0 1.65em;
+      text-align: left;
+      // overflow: hidden;
+      clear:none;
+      @extend .cf;
+    }
+    &::before {
+      content: '⬡';
+      pointer-events: inherit;
+      display: inline-block;
+      width: 1rem;
+      margin: 0 -0.65em 0 0;
+      vertical-align: top;
+      @extend .transition-all;
+    }
+    &:hover::before {
+      content: '⎔';//'⏣';//
+      //margin: 0 -0.65em 0 0;
+      color: $link-color;
+    }
+    &:hover {
+
+    }
+  }
+}
+
+.footnote {
+  @extend .centred-h;
+  //@extend .small-italics;
+  margin-top: 4.95rem;
+  //font-size: 1rem;
+  text-align: center;
+  color: $gray;
+}
+
+section.tree {
+  a[name="tree"] {
+    height: 700px;
+    display: block;
+    margin-bottom: -5rem;
+    figure {
+      overflow: hidden;
+    }
+  }
+}
+
+
+footer {
+  @include border-top();
+  padding: 0 0 $grid-unit 0;
+  background: $background-color;
+  ul, p {
+    @extend .centred-h;
+    text-align: center;
+  }
+  ul {
+    @include small-menu();
+  }
+}

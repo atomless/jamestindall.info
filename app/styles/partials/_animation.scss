@@ -1,0 +1,13 @@
+@keyframes full-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.contact-details li:hover::before {
+  //-webkit-animation: full-rotation 1s infinite;
+  // animation: full-rotation 1s infinite;
+}

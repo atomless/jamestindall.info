@@ -1,0 +1,214 @@
+// @import "../../components/vendor/sass_bootstrap/mixins";
+
+// @import "foundation/components/global";
+// @import "foundation/components/grid";
+
+@import "compass/css3/transition";
+
+@import "compass/css3/transform";
+
+@import "compass/css3/columns"; // see http://compass-style.org/reference/compass/css3/columns/
+
+// @import "compass/layout/grid-background";
+
+//@import "compass/layout/stretching"; // see http://compass-style.org/reference/compass/layout/stretching/
+
+// $blueprint_grid_columns: 8;
+// $blueprint_grid_width: 40px;
+
+// @import "blueprint";
+
+.transition-all {
+  @include transition(all 0.2s ease-out);
+}
+
+//http://davidensinger.com/2013/03/using-rems-with-sass/
+@mixin rem($property, $values) {
+  // Create a couple of empty lists as output buffers.
+  $font-size: $base-font-size;
+  $px-values: ();
+  $rem-values: ();
+
+  // Loop through the $values list
+  @each $value in $values {
+    // For each property value, if it's in rem or px, derive both rem and
+    // px values for it and add those to the end of the appropriate buffer.
+    // Ensure all pixel values are rounded to the nearest pixel.
+    @if $value == 0 or $value == 0px {
+      // 0 -- use it without a unit
+      $px-values: join($px-values, 0);
+      $rem-values: join($rem-values, 0);
+    } @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+      // px value given - calculate rem value from font-size
+      $new-rem-value: $value / $font-size;
+      $px-values: join($px-values, round($value));
+      $rem-values: join($rem-values, #{$new-rem-value}rem);
+    } @else if type-of($value) == number and not unitless($value) and (unit($value) == "%") {
+      // % value given - don't add px or rem
+      $px-values: join($px-values, #{$value});
+      $rem-values: join($rem-values, #{$value});
+    } @else if $value == auto {
+      // auto - don't add px or rem
+      $px-values: join($px-values, auto);
+      $rem-values: join($rem-values, auto);
+    } @else {
+      // unitless value - use those directly as rem and calculate the px-fallback
+      $px-values: join($px-values, round($value * $font-size));
+      $rem-values: join($rem-values, #{$value}rem);
+    }
+  }
+
+  // output the converted rules
+  #{$property}: $px-values;
+  #{$property}: $rem-values;
+}
+
+
+@mixin small-menu() {
+  @extend .centred-h;
+  padding: 0;
+
+  li {
+    display:inline;
+    &::before {
+      content: '·';
+      font-family: inherit !important;
+      //font-size: .85rem;
+      padding: 0 .5rem 0 .2rem;
+    }
+    &:first-child::before {
+      content: '';
+      padding: 0 0 0 0 !important;
+    }
+    a  {
+      @extend .menu-titles;
+      position: relative;
+      padding-bottom: .5rem;
+      &:link,
+      &:visited {
+        color: $heading-color;
+      }
+      &:focus,
+      &:hover,
+      &:active {
+        color: $link-color;
+      }
+      // &.current:after {
+      //   content: '↧';
+      //   position: absolute;
+      //   top: 1rem;
+      //   left: 30%;
+      //   font-size: 1rem;
+      // }
+    }
+  }
+}
+
+@mixin border-top {
+  border-top: 1px solid $gray-lighter;
+}
+
+// override typeplate definition-list mixin
+
+@mixin jdefinition-list-style($style) {
+  // lining style
+  @if $style == lining {
+    dt,
+    dd {
+      display: inline;
+      margin: 0;
+      & + dt {
+        &::before {
+          content: "\A";
+          white-space: pre;
+        }
+      }
+    }
+    dd {
+      & + dd {
+        &::before {
+          content: ", ";
+        }
+      }
+    }
+    dt {
+      &::after {
+        content: ": ";
+        //margin-left: -0.2rem; //removes extra space between the dt and the colon
+      }
+    }
+  }
+  // dictionary-style
+  @if $style == dictionary-style {
+    dt {
+      display: inline;
+      counter-reset: definitions;
+      & + dt {
+        &::before {
+          content: ", ";
+          margin-left: -0.2rem; // removes extra space between the dt and the comma
+        }
+      }
+    }
+    dd {
+      display: block;
+      counter-increment: definitions;
+      &::before {
+        content: counter(definitions, decimal) ". ";
+      }
+    }
+  }
+}
+
+@mixin add-bubble-arrow($edge: bottom, $h: 50%, $v: 0px, $line-color: $gray-lighter, $bubble-color: $background-color, $width: 1rem, $height: 1rem, $line-thickness: 2px) {
+  &::before,
+  &::after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    border: $height solid transparent;
+    height: $height * 2;
+    width: $width * 2;
+    background-color: transparent;
+  }
+  @if ($edge == bottom) {
+    &::before,
+    &::after {
+      border-bottom: $height solid;
+      left: $h;
+      top: $height * -2;
+      margin-left: $width * -1;
+    }
+    &::before {
+      border-bottom-color: $line-color;
+    }
+    &::after {
+      border-bottom-color: $bubble-color;
+      margin-top: .1rem;
+    }
+  }
+}
+
+$body-width: 1035px;
+$baseline: 20px;
+@mixin baseline-grid {
+  $columns: 9;
+  $column-color: rgba(200,0,0,.2);
+  $baseline-color: rgba(56,255,255,.8);
+
+  // These are all automatically calculated
+  $gutter-width: 20px;  // Change if you like
+  $gutters: ($columns - 1);
+  $column-width: $body-width / $columns;
+
+  background-image: -webkit-linear-gradient(0deg, $column-color $column-width, transparent $gutter-width),
+              -webkit-linear-gradient(top, rgba(0,0,0,0) 95%, $baseline-color 100%);
+  background-image: -moz-linear-gradient(0deg, $column-color $column-width, transparent $gutter-width),
+              -moz-linear-gradient(top, rgba(0,0,0,0) 95%, $baseline-color 100%);
+  background-image: -o-linear-gradient(0deg, $column-color $column-width, transparent $gutter-width),
+              -o-linear-gradient(top, rgba(0,0,0,0) 95%, $baseline-color 100%);
+  background-size: ($column-width + $gutter-width) 100%, 100% $baseline;
+  background-position: 0px 0px; // Use to offset and center your grid
+}
+
+

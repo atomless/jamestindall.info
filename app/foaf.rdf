@@ -1,0 +1,116 @@
+<rdf:RDF
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+      xmlns:admin="http://webns.net/mvcb/">
+<foaf:PersonalProfileDocument rdf:about="">
+  <foaf:maker rdf:resource="#me"/>
+  <foaf:primaryTopic rdf:resource="#me"/>
+  <admin:generatorAgent rdf:resource="http://www.ldodds.com/foaf/foaf-a-matic"/>
+  <admin:errorReportsTo rdf:resource="mailto:leigh@ldodds.com"/>
+</foaf:PersonalProfileDocument>
+<foaf:Person rdf:ID="me">
+<foaf:name>James Tindall</foaf:name>
+<foaf:title>Mr</foaf:title>
+<foaf:givenname>James</foaf:givenname>
+<foaf:family_name>Tindall</foaf:family_name>
+<foaf:nick>atomless</foaf:nick>
+<foaf:mbox_sha1sum>775855ae25b5e9b194ae5d4517936fd2ef6d6850</foaf:mbox_sha1sum>
+<foaf:homepage rdf:resource="http://atomless.com/"/>
+<foaf:depiction rdf:resource="http://atomless.com/assets/images/atomless-pavatar.gif"/>
+<foaf:phone rdf:resource="tel:+44(0)1305-250-377"/>
+<foaf:workplaceHomepage rdf:resource="http://atomless.com/"/>
+<foaf:workInfoHomepage rdf:resource="http://jamestindall.net/"/>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Alexander Kohlhofer</foaf:name>
+<foaf:mbox_sha1sum>5dbc8036b710758c29e4801e5d86e7499abb30e8</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>James Tarling</foaf:name>
+<foaf:mbox_sha1sum>7ab0d695071cdb2ecf3567ea9945ec9924d1a54e</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Dorian Moore</foaf:name>
+<foaf:mbox_sha1sum>555513fb0884307610d13de0d16161adb2c7dc82</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Andrew Shoben</foaf:name>
+<foaf:mbox_sha1sum>7108a3c17678f6c5a48e1df3643b8f369da4c9ec</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Jacob Masters</foaf:name>
+<foaf:mbox_sha1sum>1b2fc1f1414626e93e3f54049925ed1be7d35d9e</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Daniel Brown</foaf:name>
+<foaf:mbox_sha1sum>fdc334a1a956198f057096cf5e92b5ae916575e1</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Alexander Sinon Horn</foaf:name>
+<foaf:mbox_sha1sum>660d45c648a0319b12b2299449242bcd09e1a72e</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Kieran Macmillan</foaf:name>
+<foaf:mbox_sha1sum>9c8fbc0102332775c96e1e33961a163e2641e688</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Ed Burton</foaf:name>
+<foaf:mbox_sha1sum>3c7bd516c929cf51051e6829e9f07a7619f995ce</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Andreas Miller</foaf:name>
+<foaf:mbox_sha1sum>41a3f714aebe10e31c1452b45cb5c733edb19ea7</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Miguel Carvalhais</foaf:name>
+<foaf:mbox_sha1sum>187517b88bcd44601aa574f8ed25af2037c52bbb</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Tom Holley</foaf:name>
+<foaf:mbox_sha1sum>001ce1b17a8a659437db53e2f28c0d51b24952ef</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Lia Something</foaf:name>
+<foaf:mbox_sha1sum>861f00f4a0073be82622eb4769170bdbd37d3f0c</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Lloyd Thomas</foaf:name>
+<foaf:mbox_sha1sum>8c9121357d41801e5489ed11d0acde2199b388a8</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>David Muth</foaf:name>
+<foaf:mbox_sha1sum>2babeb85c5a6d86144af2403b7cf3ebdf52f0a76</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Tim Diggins</foaf:name>
+<foaf:mbox_sha1sum>c19f1236f50f1632d17ce38af6abae6e49162d07</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Tom Hobbs</foaf:name>
+<foaf:mbox_sha1sum>428a2a6069b0d5071e914eaafa8eb7ab48cb4fae</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Abby Tindall</foaf:name>
+<foaf:mbox_sha1sum>bcb692a748d89db81a23d549868ec60a05bad799</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Louis Cox</foaf:name>
+<foaf:mbox_sha1sum>ff85ad0e10abee049b27ba921cdf54a71c571df8</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Rebecca Molina</foaf:name>
+<foaf:mbox_sha1sum>6a011049aead214b8ccda9b1f9851a976f53c62f</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Fiddian Warman</foaf:name>
+<foaf:mbox_sha1sum>86f6e7d8a2b8f2d447d2fba088249a50bd74480e</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Golan Levin</foaf:name>
+<foaf:mbox_sha1sum>138ebaeac492e117e733576d15801d9eed871321</foaf:mbox_sha1sum></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>Zachary Lieberman</foaf:name>
+<foaf:mbox_sha1sum>f4ee08635a44dc3e85f4fc1837563f3df970ed8d</foaf:mbox_sha1sum></foaf:Person></foaf:knows></foaf:Person>
+</rdf:RDF>

@@ -1,0 +1,47 @@
+AddHandler php5-script .php
+
+# AuthType Basic
+# AuthName "protected area"
+# AuthUserFile /home/11525/.htpasswd
+# AuthGroupFile /home/11525/.htgroup
+# Require user guest
+
+<FilesMatch "\.(ttf|otf|eot)$">
+  Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+# Webfonts
+AddType application/vnd.ms-fontobject  eot
+AddType application/x-font-ttf         ttf ttc
+AddType font/opentype                  otf
+AddType application/x-font-woff        woff
+
+
+# Turn on URL rewriting
+RewriteEngine On
+
+# -- for openID - faster xrds discovery than finding the html link tag
+AddType application/xrds+xml .xrdf
+
+RewriteCond %{HTTP_ACCEPT} application/xrds\+xml
+RewriteCond %{HTTP_ACCEPT} !application/xrds\+xml\s*;\s*q\s*=\s*0(\.0{1,3})?\s*(,|$)
+RewriteRule ^$ yadis.xrdf [L]
+# --
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteCond %{HTTP_HOST} ^www\.jamestindall\.info$ [NC]
+RewriteRule ^(.*)$ http://ramblings.jamestindall.info/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^blog\.jamestindall\.info$ [NC]
+RewriteRule ^(.*)$ http://ramblings.jamestindall.info/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^lifestream\.jamestindall\.info$ [NC]
+RewriteRule ^(.*)$ http://noise.jamestindall.info/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^sketchbook\.jamestindall\.info$ [NC]
+RewriteRule ^(.*)$ http://scribbles.jamestindall.info/$1 [L,R=301]
+
+#RewriteCond %{HTTP_HOST} ^jamestindall\.info$ [PT]
+#RewriteRule ^(.*)$ http://jamestindall.info/app/$1 [PT]
+

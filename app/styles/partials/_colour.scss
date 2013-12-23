@@ -1,0 +1,7 @@
+body * {
+  @include transition(background-color 0.5s ease-in);
+}
+// add colours here to be triggered on scolling?
+body.red {
+  background-color: red;
+}
