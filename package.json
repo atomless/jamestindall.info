@@ -16,6 +16,13 @@
     "type": "git",
     "url": "https://github.com/atomless/jamestindall.info"
   },
+  "browser": {
+  },
+  "browserify-shim": {
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
   "dependencies": {
     "console-browserify": "~1.0.1"
   },
@@ -58,7 +65,8 @@
     "grunt-ngmin": "0.0.3",
     "grunt-rev": "~0.1.0",
     "grunt-usemin": "~2.0.1",
-    "grunt-concurrent": "~0.4.1"
+    "grunt-concurrent": "~0.4.1",
+    "browserify-shim": "~3.1.4"
   },
   "engines": {
     "node": ">=0.10.22",

@@ -1,7 +1,7 @@
 /* Grid system and page structure */
 
 body, html {
-  min-width:360px;
+  //min-width:360px;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden !important;
@@ -87,12 +87,16 @@ figure {
   }
 }
 
+blockquote {
+  @extend .centred-h;
+}
+
 .header-image {
   @extend .centred-h;
 }
 
 img[src*="animated-portrait.gif"] {
-  padding: $grid-unitx2 0 $grid-unit 0;
+  padding: $grid-unitx3 0 $grid-unit 0;
 }
 
 nav {
@@ -132,7 +136,7 @@ header {
       display: block;
       width: .9rem;
       height: 2px;
-      margin-bottom: .15rem;
+      margin-bottom: 3px;
     }
     span:last-child {
       margin-bottom: 0;
@@ -192,10 +196,10 @@ main {
   }
 }
 
-#cv-section article {
-  @extend .centred-h;
-}
 .cv {
+  article {
+    @extend .centred-h;
+  }
   ul {
     list-style: none;
     padding: 0;
@@ -239,7 +243,7 @@ main {
         position: absolute;
         width: 100%;
         z-index: -2;
-        bottom: -$grid-unitx4;
+        bottom: -7.8rem;
       }
     }
     dl {
@@ -356,7 +360,7 @@ main {
 }
 
 section.tree {
-  a[name="tree"] {
+  a[id="tree"] {
     height: 700px;
     display: block;
     margin-bottom: -5rem;
@@ -377,5 +381,30 @@ footer {
   }
   ul {
     @include small-menu();
+  }
+}
+
+@media (max-width: 700px) {
+  .bio-body {
+    @include column-count(1);
+  }
+  .contact-details {
+    ul {
+      @include column-count(3);
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  html {
+    font-size: 110%;
+  }
+  blockquote p {
+    padding: 0;
+  }
+  .contact-details {
+    ul {
+      @include column-count(2);
+    }
   }
 }

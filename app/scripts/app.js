@@ -1,40 +1,72 @@
 var $ = require('jquery');
 
+//var toRem = require('toRem');
+
 require('animo.js');
 
 
 IS_AUTO_SCROLLING = false;
 
+IMG_LOADING_TIMEOUT = false;
 
-var randomTree = function() {
 
-  var randnum = Math.ceil(Math.random() * 72);
-  var filenum = ('0' + randnum).slice(-2);
-  console.log('LOADING random tree', filenum);
-  $('a[name="tree"] img').attr('src', 'http://atomless.com/images/72_trees/' + filenum + '.jpg');
+// This Function will always return the initial font-size of the html element
+var getBaseFontPxSize = function() {
+
+  var html = document.getElementsByTagName('html')[0];
+  return parseInt(window.getComputedStyle(html)['fontSize']);
 };
 
+// This function will convert pixel to rem
+var pxToRem = function(px) {
 
-var handleTreeClick = function(tree_link, tree_img) {
+  return (parseInt(px) / getBaseFontPxSize());
+}
 
-  if ( ! tree_link.hasClass('noclick')) {
 
-    tree_link.addClass('noclick');
-    tree_img.animo('blur', {duration: 0.5, amount: 4}, function() {
-      $('figure', tree_link).animate({
-        opacity: 0
-      }, 500, function() {
-        tree_link.addClass('loading');
-        randomTree();
-      });
-    });
+var remToPx = function(rem) {
+
+  return (parseInt(rem * getBaseFontPxSize()));
+}
+
+
+var loadingTreeErrorCheck = function(tree_link, tree_img) {
+
+  if (tree_link.hasClass('loading')) {
+    randomTree(tree_link, tree_img);
+  } else {
+    tree_img.trigger('load');
   }
 };
 
+var randomTree = function(tree_link, tree_img) {
 
-var handleTreeLoaded = function(tree_link, tree_img) {
+  var randnum = Math.ceil(Math.random() * 72);
+  var filenum = ('0' + randnum).slice(-2);
 
-  tree_link.removeClass('loading');
+  tree_link.addClass('loading');
+
+  console.log('LOADING random tree', filenum);
+  tree_img.attr('src', 'http://atomless.com/images/72_trees/' + filenum + '.jpg');
+  IMG_LOADING_TIMEOUT = setTimeout(function() { loadingTreeErrorCheck(tree_link, tree_img); }, 6000);
+};
+
+
+var hideTree = function(tree_link, tree_img) {
+
+console.log('hiding tree');
+  tree_img.animo('blur', {duration: 0.5, amount: 4}, function() {
+    $('figure', tree_link).animate({
+      opacity: 0
+    }, 500, function() {
+      randomTree(tree_link, tree_img);
+    });
+  });
+};
+
+
+var showTree = function(tree_link, tree_img) {
+
   $('figure', tree_link).animate({
     opacity: 1
   }, 500, function() {
@@ -45,22 +77,39 @@ var handleTreeLoaded = function(tree_link, tree_img) {
 };
 
 
+var handleTreeClick = function(tree_link, tree_img) {
+
+  if ( ! tree_link.hasClass('noclick')) {
+    tree_link.addClass('noclick');
+    hideTree(tree_link, tree_img);
+  }
+};
+
+
+var handleTreeLoaded = function(tree_link, tree_img) {
+
+  console.log('img loaded');
+  if (tree_link.hasClass('loading')) {
+    tree_link.removeClass('loading');
+    clearTimeout(IMG_LOADING_TIMEOUT);
+    showTree(tree_link, tree_img);
+  }
+};
+
+
 var setupTree = function() {
 
-  var tree_link = $('a[name="tree"]');
+  var tree_link = $('a[id="tree"]');
   var tree_img = $('img', tree_link);
-
   tree_link.on('click', function(e) {
-
+    console.log('click');
     e.preventDefault();
     handleTreeClick(tree_link, tree_img);
   });
-
   tree_img
     .load(function() { handleTreeLoaded(tree_link, tree_img); })
     .error(function() { console.log("error loading image"); });
-
-  randomTree();
+  randomTree(tree_link, tree_img);
 };
 
 
@@ -159,7 +208,7 @@ var handleWindowScroll = function(e) {
 var hideSiteNav = function(speed) {
 
   $('#site-nav')
-    .stop()
+    .stop(true, true)
     .animate({height: '0px'}, speed, function() {
       $(this).animate({borderBottomWidth: '0px'}, 'slow', function() {
         $(this).addClass('collapsed');
@@ -170,12 +219,14 @@ var hideSiteNav = function(speed) {
 
 var showSiteNav = function(speed) {
 
+  var bw = remToPx(1.65);
+  var h = remToPx(10);
   $('#site-nav')
-    .stop()
+    .stop(true, true)
     .css({height: '0px', borderBottomWidth: '0px'})
     .removeClass('collapsed')
-    .animate({borderBottomWidth: '33px'}, 0, function() {
-      $(this).animate({height: '204px'}, speed, function() {});
+    .animate({borderBottomWidth: bw + 'px'}, 0, function() {
+      $(this).animate({height: h + 'px'}, speed, function() {});
     });
 };
 
@@ -195,20 +246,57 @@ var handleNavToggleClick = function(e) {
 };
 
 
+var layoutImages = function() {
+
+  var w,d;
+  var ww = $(window).outerWidth();
+  var imgs = $('figure > img');
+
+  imgs.each(function() {
+    w = $(this).width();
+    if (w > ww) {
+      d = Math.ceil(0.5 *(w - ww)) * -1;
+      $(this).css({marginLeft: d + 'px'});
+    } else {
+      $(this).css({marginLeft: 'auto'});
+    }
+  });
+};
+
+
+var layout = function() {
+
+  var bw = remToPx(1.65);
+  var h = remToPx(10);
+  if ( ! $('#site-nav').hasClass('collapsed')) {
+    $('#site-nav').css({borderBottomWidth: bw + 'px', height: h + 'px'});
+  }
+
+  layoutImages();
+};
+
+
 var initialize = function() {
+
+  //console.log(toRem(18));
+
+  $(window).resize(function(e) {
+
+    layout();
+  });
 
   $(window).scroll(function(e) {
 
     handleWindowScroll(e);
   });
 
-  setupAnchorScroll();
-
   $('#nav-toggle, #site-name').on('click', function(e) {
 
     handleNavToggleClick(e);
   });
 
+  setupAnchorScroll();
+  layout();
   setupTree();
 };
 

@@ -252,9 +252,14 @@ blockquote {
   @extend .quote-text;
   font-style: italic;
   // @include pull-quotes(inherit, $pull-quote-opacity, $pull-quote-color);
-  padding: $grid-unit;
+  padding: $grid-unit !important;
   background: #f8f8f8;
   margin-bottom: 0;
+
+}
+
+blockquote p {
+  @extend .centred-h;
 }
 
 blockquote p:last-of-type {
@@ -274,7 +279,7 @@ blockquote + figcaption {
   width: 100%;
   padding: 0 $grid-unit;
   line-height: 1.3;
-  background-color: rgba(255,255,255, 0.7);
+  //background-color: rgba(255,255,255, 0.7);
 }
 
 figcaption cite:before{
@@ -348,4 +353,8 @@ footer {
   p.small {
     @extend .small-italics;
   }
+}
+
+@media (max-width: 512px) {
+
 }

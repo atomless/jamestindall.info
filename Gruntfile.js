@@ -179,7 +179,8 @@ module.exports = function (grunt) {
           //'<%= yeoman.dir.app %>/scripts/vendor/fast-1.0.2.min.js',
           //'<%= yeoman.dir.app %>/scripts/vendor/css3-multi-column.min.js',
           '<%= yeoman.dir.bower %>/jquery/jquery.js',
-          // '<%= yeoman.dir.app %>/scripts/vendor/jquery.spin.js',
+          //'<%= yeoman.dir.app %>/scripts/vendor/*.js',
+          '<%= yeoman.dir.app %>/scripts/lib/*.js',
           // '<%= yeoman.dir.bower %>/jquery.transit/jquery.transit.js',
           '<%= yeoman.dir.bower %>/animo.js/animo.js'
           //'<%= yeoman.dir.app %>/components/sidr/jquery.sidr.min.js',
@@ -189,11 +190,7 @@ module.exports = function (grunt) {
         dest: '.tmp/scripts/vendor.js',
         options: {
           //debug: true,
-          shim: {
-            // jQuery: {
-            //   path: '<%= yeoman.dir.bower %>/jquery/jquery.min.js',
-            //   exports: '$'
-            // }
+          //alias: '<%= yeoman.dir.app %>/scripts/lib/to-rem.js:toRem',
             // lodash: {
             //   path: '<%= yeoman.dir.bower %>/lodash/dist/lodash.js',
             //   exports: '_'
@@ -206,7 +203,7 @@ module.exports = function (grunt) {
             //     lodash: '_'
             //   }
             // }
-          },
+          // },
           // alias: [
           //   '<%= yeoman.dir.bower %>/lodash/dist/lodash.js:underscore',
           //   '<%= yeoman.dir.bower %>/backbone/backbone.js:backbone'
@@ -221,6 +218,7 @@ module.exports = function (grunt) {
           //debug: true,
           external: [
             'jquery',
+            //'toRem',
             'animo.js'
           ],
           transform: [
@@ -266,8 +264,7 @@ module.exports = function (grunt) {
 
     usemin: {
       html: [
-        '<%= yeoman.dir.dist %>/index.html',
-        '<%= yeoman.dir.dist %>/views/{,*/}*.html'
+        '<%= yeoman.dir.dist %>/index.html'
       ],
       css: '<%= yeoman.dir.dist %>/styles/{,*/}*.css',
       options: {
@@ -396,6 +393,7 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.dir.app %>',
           dest: '<%= yeoman.dir.dist %>',
           src: [
+            '!./components',
             '*.{ico,txt,rdf,xrdf}',
             'google098bd9ad020dd671.html',
             '.htaccess',
@@ -442,14 +440,14 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'concurrent:tests',
+    //'concurrent:tests',
     'concurrent:preprocessorsDist',
     'concurrent:minify',
     'concat:dist',
     'copy:dist',
-    'ngmin',
+    //'ngmin',
     'uglify',
-    'copy:dist',
+    //'copy:dist',
     'rev',
     'usemin'
   ]);
