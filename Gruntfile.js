@@ -353,9 +353,9 @@ module.exports = function (grunt) {
 
     uglify: {
       options: {
-        mangle: false,
-        compress: false,
-        beautify: true,
+        mangle: true,
+        compress: true,
+        beautify: false,
         report: 'min',
         // preserveComments: function (comment) {
         //   return (comment === false);
@@ -380,7 +380,7 @@ module.exports = function (grunt) {
       },
       js: '<%= yeoman.dir.dist %>/scripts/{,*/}*.js',
       css: '<%= yeoman.dir.dist %>/styles/{,*/}*.css',
-      img: '<%= yeoman.dir.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+      //img: '<%= yeoman.dir.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
       font: '<%= yeoman.dir.dist %>/styles/fonts/*'
     },
 
@@ -397,7 +397,7 @@ module.exports = function (grunt) {
             '*.{ico,txt,rdf,xrdf}',
             'google098bd9ad020dd671.html',
             '.htaccess',
-            'images/{,*/}*.{gif,webp}',
+            'images/{,*/}*.{gif,svg}',
             'styles/fonts/*',
             '*.json',
             'LICENSE',

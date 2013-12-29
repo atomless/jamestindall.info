@@ -2,7 +2,7 @@
 
 body, html {
   //min-width:360px;
-  overflow: scroll;
+  //overflow: scroll;
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden !important;
 }
@@ -85,6 +85,17 @@ figure {
   img {
     @extend .centred-h;
   }
+}
+
+.interlude figcaption {
+  margin-top: $grid-unitx3;
+  margin-bottom: -$grid-unitx3;
+  opacity: 0;
+  @extend .transition-all;
+}
+
+.interlude:hover figcaption {
+  opacity: 1;
 }
 
 blockquote {
@@ -331,7 +342,7 @@ main {
       @extend .cf;
     }
     &::before {
-      content: '⬡';
+      content: '◐';//'⬡';
       pointer-events: inherit;
       display: inline-block;
       width: 1rem;
@@ -340,7 +351,7 @@ main {
       @extend .transition-all;
     }
     &:hover::before {
-      content: '⎔';//'⏣';//
+      content: '◑';//'⎔';//'⏣';//
       //margin: 0 -0.65em 0 0;
       color: $link-color;
     }

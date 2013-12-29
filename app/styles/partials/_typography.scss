@@ -18,12 +18,21 @@ $pull-quote-color: $gray-light;
 
 body {
   counter-reset: figCounter;
+  @extend .transition-all;
 }
 
 .hyphens,
 p {
-  -ms-word-break: break-all;
-  word-break: break-all;
+  // word-wrap: break-word;
+
+  // white-space: pre-wrap; // css-3
+  // white-space: -moz-pre-wrap; // Mozilla, since 1999
+
+  // white-space: -o-pre-wrap; // Opera 7
+
+  // -ms-word-break: break-all;
+  // -moz-word-break: break-all;
+  // word-break: break-all;
 
   /* Non standard for webkit */
   word-break: break-word;
@@ -56,7 +65,7 @@ pre, code, var, kbd, samp, tt, abbr, acronym {
 }
 
 .leader-font-size {
-  @include type-scale(28, $font-base, '#{$type-scale-unit-value}', $measure);
+  @include type-scale(38, $font-base, '#{$type-scale-unit-value}', $measure);
 }
 
 .quote-font-size {
@@ -253,7 +262,7 @@ blockquote {
   font-style: italic;
   // @include pull-quotes(inherit, $pull-quote-opacity, $pull-quote-color);
   padding: $grid-unit !important;
-  background: #f8f8f8;
+  background: #f5f5f5;
   margin-bottom: 0;
 
 }
@@ -274,7 +283,7 @@ blockquote p:last-of-type:after {
   content: '”';
 }
 
-blockquote + figcaption {
+figcaption {
   text-align: center;
   width: 100%;
   padding: 0 $grid-unit;

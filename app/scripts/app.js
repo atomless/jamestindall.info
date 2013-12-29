@@ -54,11 +54,11 @@ var randomTree = function(tree_link, tree_img) {
 
 var hideTree = function(tree_link, tree_img) {
 
-console.log('hiding tree');
+  //console.log('hiding tree');
   tree_img.animo('blur', {duration: 0.5, amount: 4}, function() {
     $('figure', tree_link).animate({
       opacity: 0
-    }, 500, function() {
+    }, 1000, function() {
       randomTree(tree_link, tree_img);
     });
   });
@@ -69,7 +69,7 @@ var showTree = function(tree_link, tree_img) {
 
   $('figure', tree_link).animate({
     opacity: 1
-  }, 500, function() {
+  }, 1000, function() {
     tree_img.animo('blur', {duration: 0.5,  amount: 0}, function(){
       tree_link.removeClass('noclick');
     });
@@ -223,10 +223,12 @@ var showSiteNav = function(speed) {
   var h = remToPx(10);
   $('#site-nav')
     .stop(true, true)
-    .css({height: '0px', borderBottomWidth: '0px'})
+    .css({height: '0px', borderBottomWidth: '0px', background: '#e6e6e6'})
     .removeClass('collapsed')
     .animate({borderBottomWidth: bw + 'px'}, 0, function() {
-      $(this).animate({height: h + 'px'}, speed, function() {});
+      $(this).animate({height: h + 'px'}, speed, function() {
+        $(this).css({background: '#555'})
+      });
     });
 };
 
