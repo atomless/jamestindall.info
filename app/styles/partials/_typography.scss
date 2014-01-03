@@ -230,12 +230,12 @@ p strong {
 }
 
 del {
-  color: $gray-light;
+  color: $gray;
 }
 
 ins {
   text-decoration: none;
-  border-bottom:1px dashed $gray-light;
+  border-bottom:1px dashed $gray;
 }
 
 sub, sup {
@@ -262,7 +262,7 @@ blockquote {
   font-style: italic;
   // @include pull-quotes(inherit, $pull-quote-opacity, $pull-quote-color);
   padding: $grid-unit !important;
-  background: #f5f5f5;
+  background: $block-color;
   margin-bottom: 0;
 
 }

@@ -1,4 +1,4 @@
 jamestindall.info
 =================
 
-my website
+A simple Bio and CV website

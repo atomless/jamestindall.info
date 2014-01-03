@@ -1,7 +1,6 @@
 var $ = require('jquery');
-
-//var toRem = require('toRem');
-
+var SuperGif = require('./lib/libgif.js');
+var RubbableGif = require('./lib/rubbable.js');
 require('animo.js');
 
 
@@ -126,6 +125,16 @@ var scrollTo = function(y, _speed, hash) {
 };
 
 
+var scrollBy = function(scroll_amount) {
+
+  IS_AUTO_SCROLLING = true;
+  var y = $(window).scrollTop() + scroll_amount;
+  $('html, body').animate({ scrollTop: y }, 0, function() {
+    IS_AUTO_SCROLLING = false;
+  });
+}
+
+
 var isScrolledIntoView = function(elem, threshhold, scrollpos) {
 
   var viewtop = (scrollpos || $(window).scrollTop());
@@ -182,9 +191,24 @@ var setupAnchorScroll = function() {
     var hash = href.slice(href.indexOf('#') + 1);
     var anchor = $('a[id="' + hash + '"]');
     console.log(anchor);
+    var scrollpos = 0;
+    var offset = 0;
     if (anchor.length !== 0) {
       IS_AUTO_SCROLLING = true;
-      var scrollpos = anchor.offset().top;
+      if (anchor.hasClass('hidden')) {
+        scrollpos = anchor.removeClass('hidden').offset().top;
+        anchor.addClass('hidden');
+      } else {
+        scrollpos = anchor.offset().top;
+      }
+      offset = anchor.attr('data-scroll-offset-rem') || 0;
+      if (offset) {
+        offset = remToPx(offset);
+        scrollpos += offset;
+      }
+      if (! $('#site-nav').hasClass('collapsed')) {
+        scrollpos -= ($('#site-nav').height() + remToPx(1.65));
+      }
       scrollTo(scrollpos, 'slow', hash);
     }
   });
@@ -223,7 +247,7 @@ var showSiteNav = function(speed) {
   var h = remToPx(10);
   $('#site-nav')
     .stop(true, true)
-    .css({height: '0px', borderBottomWidth: '0px', background: '#e6e6e6'})
+    .css({height: '0px', borderBottomWidth: '0px', background: '#fdfdfd'})
     .removeClass('collapsed')
     .animate({borderBottomWidth: bw + 'px'}, 0, function() {
       $(this).animate({height: h + 'px'}, speed, function() {
@@ -248,11 +272,33 @@ var handleNavToggleClick = function(e) {
 };
 
 
+var setUpSuperGif = function(img_id) {
+
+  var rg = new RubbableGif({ gif: $(img_id)[0] } );
+  rg.load();
+};
+
+
+var setupInterludes = function () {
+
+  $('.interlude').on('mousedown', function(e){
+    e.preventDefault();
+    $(this).addClass('mousedown');
+  });
+  $('.interlude').on('mouseup', function(e){
+    $(this).removeClass('mousedown');
+  });
+  $(document).on('mouseup', function(e){
+    $('.interlude.mousedown').removeClass('mousedown');
+  });
+};
+
+
 var layoutImages = function() {
 
   var w,d;
   var ww = $(window).outerWidth();
-  var imgs = $('figure > img');
+  var imgs = $('figure > img, .portrait canvas');
 
   imgs.each(function() {
     w = $(this).width();
@@ -263,6 +309,7 @@ var layoutImages = function() {
       $(this).css({marginLeft: 'auto'});
     }
   });
+  console.log('laid out images');
 };
 
 
@@ -280,7 +327,7 @@ var layout = function() {
 
 var initialize = function() {
 
-  //console.log(toRem(18));
+  console.log(pxToRem(567));
 
   $(window).resize(function(e) {
 
@@ -292,14 +339,23 @@ var initialize = function() {
     handleWindowScroll(e);
   });
 
+  $(window).on('canvas-touch-drag-v', function(e, scroll_amount) {
+    console.log('canvas-touch-drag-v', e);
+    scrollBy(scroll_amount);
+  });
+
+  // $('.portrait .interlude-image').hover(function(){freezeGif($(this)[0])}, function(){ $(this).attr('src','images/animated-portrait.gif')});
+
   $('#nav-toggle, #site-name').on('click', function(e) {
 
     handleNavToggleClick(e);
   });
 
+  setupInterludes();
+  setUpSuperGif('#portrait1');
   setupAnchorScroll();
-  layout();
   setupTree();
+  layout();
 };
 
 $().ready(function () {

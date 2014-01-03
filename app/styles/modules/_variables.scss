@@ -3,23 +3,60 @@
 
 // COLOURS
 
-$background-color: #fdfdfd;
+$base-dark: #000000;
+
+$base-light: #fdfdfd;
+
+$background-color: $base-light;
 
 $link-color: rgba(205, 178, 0, 1);//92,200,0, 0.5);
 
-$link-color-light: rgba(205, 178, 0, 0.5);
+$link-color-light: rgba(205, 178, 0, 0.6);
 
-$gray-dark: lighten(#000, 20%) !default;
+$heading-color-dark: lighten($base-dark, 2%) !default;
 
-$gray: lighten(#000, 60%) !default;
+$heading-color: lighten($base-dark, 22%) !default;
 
-$gray-light: lighten(#000, 75%) !default;
+$body-copy-color: lighten($base-dark, 30%) !default;
 
-$gray-lighter: lighten(#000, 90%) !default;
+$gray-dark: lighten($base-dark, 32%) !default;
 
-$body-copy-color: #555 !default;
+$gray: lighten($base-dark, 64%) !default;
 
-$heading-color: #111 !default;
+$gray-light: lighten($base-dark, 70%) !default;
+
+$block-color: lighten($base-dark, 96%) !default;
+
+$gray-lighter: lighten($base-dark, 92%) !default;
+
+
+/* blues
+$base-dark: #000000;
+
+$base-light: #fdfdfd;
+
+$background-color: hsla(221, 46%, 99%, 1);
+
+$link-color: hsla(61, 100%, 44%, 1);//rgba(205, 178, 0, 1);//92,200,0, 0.5);
+
+$link-color-light: hsla(61, 100%, 44%, 1);//rgba(205, 178, 0, 0.5);
+
+$heading-color: hsla(221, 100%, 1%, 1) !default;
+
+$body-copy-color: hsla(221, 100%, 12%, 1) !default;
+
+$gray-dark: hsla(221, 36%, 38%, 1) !default;
+
+$gray: hsla(221, 16%, 58%, 1) !default;
+
+$gray-light: hsla(221, 36%, 80%, 1) !default;
+
+$block-color: hsla(221, 34%, 95%, 1);
+
+$gray-lighter: hsla(221, 36%, 89%, 1);//lighten($base-dark, 90%) !default;
+*/
+
+
 
 // MEASUREMENTS
 

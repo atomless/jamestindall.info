@@ -7,6 +7,8 @@
 
 @import "compass/css3/transform";
 
+@import "compass/css3/filter";
+
 @import "compass/css3/columns"; // see http://compass-style.org/reference/compass/css3/columns/
 
 // @import "compass/layout/grid-background";
@@ -20,6 +22,10 @@
 
 .transition-all {
   @include transition(all 0.2s ease-out);
+}
+
+.transition-all {
+  @include transition(all 1s ease-out);
 }
 
 //http://davidensinger.com/2013/03/using-rems-with-sass/
@@ -86,7 +92,7 @@
       padding-bottom: .5rem;
       &:link,
       &:visited {
-        color: $heading-color;
+        color: $heading-color-dark;
       }
       &:focus,
       &:hover,

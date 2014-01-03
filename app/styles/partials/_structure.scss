@@ -13,9 +13,11 @@ body {
 
 .hidden {
   display: none !important;
+  visibility: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
   height: 0 !important;
+  width: 0 !important;
 }
 
 .loading {
@@ -87,36 +89,55 @@ figure {
   }
 }
 
-.interlude figcaption {
-  margin-top: $grid-unitx3;
-  margin-bottom: -$grid-unitx3;
-  opacity: 0;
-  @extend .transition-all;
+
+.jsgif_toolbar {
+  @extend .hidden;
 }
 
-.interlude:hover figcaption {
-  opacity: 1;
+.interlude {
+  -webkit-transition: -webkit-filter 0ms linear;
+  &.portrait {
+    height:567px;//28.35rem;//434
+    .interlude-image {
+      padding: $grid-unit 0;
+    }
+    canvas {
+      -webkit-filter: hue-rotate(90deg);
+    }
+  }
+  &:hover figcaption {
+    opacity: 1;
+  }
+  &.mousedown {
+    -webkit-filter: invert(80%);
+    -webkit-transition: -webkit-filter 1000ms linear;
+  }
+  figcaption {
+    margin-top: $grid-unitx3;
+    margin-bottom: -$grid-unitx3;
+    opacity: 0;
+    @extend .transition-all;
+  }
+  .interlude-image > canvas,
+  .interlude-image {
+    @extend .centred-h;
+    cursor: pointer;
+  }
 }
+
 
 blockquote {
   @extend .centred-h;
 }
 
-.header-image {
-  @extend .centred-h;
-}
-
-img[src*="animated-portrait.gif"] {
-  padding: $grid-unitx3 0 $grid-unit 0;
-}
-
 nav {
-  background: $body-copy-color;
+  background: $gray-dark;
   display: block;
-  border-bottom: $grid-unit solid $gray-lighter;
+  border-bottom: $grid-unit solid $background-color;
   overflow: hidden;
   &.collapsed {
     @extend .hidden;
+    background: $background-color;
   }
   .title {
     padding-top: .825rem;
@@ -131,17 +152,17 @@ nav {
 }
 
 header {
-  padding: $grid-unit 0;
+  padding: $grid-unit 0 0 0;
   text-align:center;
-  background: $gray-lighter;
+  background: $background-color;
   #nav-toggle {
     position: absolute;
     top: $grid-unit;
-    left: 0px;
+    right: 0px;
     border: 0;
     outline: none;
     padding: .35rem;
-    margin: 0 0 0 1.3rem;
+    margin: 0 1.3rem 0 0;
     span {
       background: $gray;
       display: block;
@@ -162,12 +183,14 @@ header {
   ul.small-menu {
     @include small-menu();
     margin-top: -.5rem;
+    padding-bottom: $grid-unit;
   }
 }
 
 main {
   section {
     @include border-top();
+    padding-top: $grid-unitx2;
     position: relative;
   }
   article {
@@ -255,6 +278,7 @@ main {
         width: 100%;
         z-index: -2;
         bottom: -7.8rem;
+        left: 1px;
       }
     }
     dl {
@@ -299,10 +323,12 @@ main {
     }
     dl.role {
       z-index: 2;
-      padding: $grid-unit $grid-unit $grid-unitx2;
+      padding: $grid-unitx2 $grid-unit;
       max-width: 38rem;
       margin: 0 auto;
       background-color: $background-color;
+      position: relative;
+      overflow: hidden;
       dt {
         display: none;
         //line-height: $line-height !important;
@@ -311,6 +337,15 @@ main {
       }
       p:last-of-type {
         margin-bottom:0;
+      }
+      &::before {
+        content: '↓';
+        width: 100%;
+        position: absolute;
+        top: -16px;
+        left: 1px;
+        text-align: center;
+        color: $gray-lighter;
       }
     }
   }
@@ -371,10 +406,11 @@ main {
 }
 
 section.tree {
+  padding-top: 0;
   a[id="tree"] {
     height: 700px;
     display: block;
-    margin-bottom: -5rem;
+    margin-bottom: -85px;
     figure {
       overflow: hidden;
     }
@@ -384,7 +420,7 @@ section.tree {
 
 footer {
   @include border-top();
-  padding: 0 0 $grid-unit 0;
+  padding: $grid-unitx2 0 $grid-unit 0;
   background: $background-color;
   ul, p {
     @extend .centred-h;
